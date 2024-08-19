@@ -103,15 +103,19 @@ func buildReleaseName(version string) string {
 }
 
 func buildReleasePostfix() string {
-	switch runtime.GOOS {
+	var RUNTIME_GOOS = runtime.GOOS
+	if RUNTIME_GOOS == "android" {
+		RUNTIME_GOOS = "linux"
+	}
+	switch RUNTIME_GOOS {
 	case "windows":
 		return "windows"
 	default:
 		switch runtime.GOARCH {
 		case "aarch64":
-			return runtime.GOOS + "_" + runtime.GOARCH
+			return RUNTIME_GOOS + "_" + runtime.GOARCH
 		default:
-			return runtime.GOOS
+			return RUNTIME_GOOS
 		}
 	}
 }

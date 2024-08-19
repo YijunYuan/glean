@@ -187,7 +187,8 @@ get_architecture() {
 
     if [ "$_ostype" = Linux ]; then
         if [ "$(uname -o)" = Android ]; then
-            local _ostype=Android
+            # local _ostype=Android
+            local _ostype=Linux
         fi
         if ldd --version 2>&1 | grep -q 'musl'; then
             err "musl-based systems are unsupported at the moment"
